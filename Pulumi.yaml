@@ -1,0 +1,3 @@
+name: zephyr-k8s
+runtime: nodejs
+description: A TypeScript Pulumi program to manage K8s clusters for Zephyr
