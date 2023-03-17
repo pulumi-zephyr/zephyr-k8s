@@ -1,2 +1,5 @@
 config:
   aws:region: us-west-2
+  zephyr-k8s:infraOrgName: zephyr
+  zephyr-k8s:infraProjName: zephyr-infra
+  zephyr-k8s:infraStackName: prod

@@ -7,9 +7,9 @@ const minClusterSize = config.getNumber("minClusterSize") || 3;
 const maxClusterSize = config.getNumber("maxClusterSize") || 6;
 const desiredClusterSize = config.getNumber("desiredClusterSize") || 3;
 const eksNodeInstanceType = config.get("eksNodeInstanceType") || "t3.medium";
-const infraOrgName = config.get("infraOrgName");
-const infraProjName = config.get("infraProjName");
-const infraStackName = config.get("infraStackName");
+const infraOrgName = config.require("infraOrgName");
+const infraProjName = config.require("infraProjName");
+const infraStackName = config.require("infraStackName");
 
 // Create a StackReference to get Kubeconfig from base stack
 const infraSr = new pulumi.StackReference(`${infraOrgName}/${infraProjName}/${infraStackName}`);
