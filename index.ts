@@ -1,7 +1,8 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as eks from "@pulumi/eks";
 
-// Get the current stack name
+// Get the current organization and stack names
+const currentOrgName = pulumi.getOrganization();
 const currentStackName = pulumi.getStack();
 
 // Grab some configuration values
@@ -10,8 +11,10 @@ const minClusterSize = config.getNumber("minClusterSize") || 3;
 const maxClusterSize = config.getNumber("maxClusterSize") || 6;
 const desiredClusterSize = config.getNumber("desiredClusterSize") || 3;
 const eksNodeInstanceType = config.get("eksNodeInstanceType") || "t3.medium";
-const baseOrgName = config.get("baseOrgName") || "zephyr";
+// Use the current organization name if none is specified
+const baseOrgName = config.get("baseOrgName") || currentOrgName;
 const baseProjName = config.get("baseProjName") || "zephyr-infra";
+// Use the current stack name if none is specified
 const baseStackName = config.get("baseStackName") || currentStackName;
 
 // Create a StackReference to get Kubeconfig from base stack
@@ -34,4 +37,4 @@ const eksCluster = new eks.Cluster("eks-cluster", {
 
 // Export some values for use elsewhere
 export const kubeconfig = eksCluster.kubeconfig;
-export const nodeSecurityGrp = eksCluster.nodeSecurityGroup.id;
+export const nodeSecurityGroup = eksCluster.nodeSecurityGroup.id;
