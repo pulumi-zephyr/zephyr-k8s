@@ -4,28 +4,32 @@ This is the source repository for the Pulumi code to manage the Kubernetes clust
 
 ## Deploying with Pulumi
 
-To deploy this infrastructure with Pulumi, you should:
+### Prerequisites
+
+To deploy this infrastructure with Pulumi, you need to:
 
 * have the Pulumi CLI installed, and ensure you are signed into a backend;
 * have NodeJS installed;
 * have the `kubectl` CLI tool installed; and
 * have the AWS CLI installed and configured for your AWS account.
 
+### Dependencies
+
 This project has a dependency on the base infrastructure managed by the Pulumi code in [the `zephyr-infra` repository](https://github.com/pulumi/zephyr-infra). You will need to have created a stack from that project and run a successful `pulumi up` before starting here. You will also need to know the organization name, project name, and stack name for the stack that manages the base infrastructure. All of this information can be obtained by running `pulumi stack ls` in the directory where the `zephyr-infra` project resides.
 
-Then follow these steps:
+### Instructions
+
+Follow the steps below to deploy a Kubernetes cluster (using EKS on AWS) to support the Zephyr online store:
 
 1. Clone this repository to your local system (if you haven't already).
 2. Run `npm install` to install all necessary dependencies.
-3. Run `pulumi stack init <name>` to create a new stack.
-4. Run `pulumi config set baseOrgName <org-name>` to supply the name of the Pulumi Service organization where the base infrastructure stack was created.
-5. Run `pulumi config set baseProjName <project-name>` to supply the name of the Pulumi Service project where the base infrastructure stack was created.
-6. Run `pulumi config set baseStackName <stack-name>` to supply the name of the base infrastructure stack.
-7. Run `pulumi up`.
+3. Run `pulumi stack init <name>` to create a new stack. For the smoothest experience, use the same stack name here that was used with the `zephyr-infra` project (see the Dependencies section).
+4. (Optional) Run `pulumi config set` to set values for `baseOrgName` (defaults to your current organization), `baseProjName` (defaults to "zephyr-infra"), and `baseStackName` (defaults to your current stack name). Unless you know you need specific values here, the default values are typically sufficient.
+5. Run `pulumi up`.
 
 **NOTE:** You'll see `Pulumi.test.yaml` and `Pulumi.prod.yaml` stack files in this repository. These are here for illustrative purposes (to tie back to the Pulumi blog series) and will not impact your ability to use the steps above _unless_ you use a stack name of "test" or "prod" for your stack.
 
-After the stack is finished deploying, use `pulumi stack output` to retrieve the Kubeconfig for the newly-created Kubernetes cluster:
+This Pulumi project deploys an EKS cluster. After the stack is finished deploying, use `pulumi stack output` to retrieve the Kubeconfig for the newly-created Kubernetes cluster:
 
 ```shell
 pulumi stack output kubeconfig > kubeconfig
