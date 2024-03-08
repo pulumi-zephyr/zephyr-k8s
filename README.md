@@ -1,6 +1,6 @@
 # Zephyr Archaeotech Emporium Online Store - Kubernetes Clusters
 
-This is the source repository for the Pulumi code to manage the Kubernetes clusters that support the online store of the Zephyr Archaeotech Emporium. It's used in [Pulumi's Zephyr series of blog posts](https://www.pulumi.com/blog/iac-recommended-practices-code-organization-and-stacks/) to discuss best practices when using Pulumi to manage infrastructure and applications.
+This is the source repository for the Pulumi code to manage the Kubernetes clusters that support the online store of the Zephyr Archaeotech Emporium. It's used in [Pulumi's Zephyr series of blog posts](https://www.pulumi.com/blog/tag/zephyr/) to discuss best practices when using Pulumi to manage infrastructure and applications.
 
 ## Deploying with Pulumi
 
